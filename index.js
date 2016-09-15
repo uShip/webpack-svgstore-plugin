@@ -18,8 +18,14 @@ var path = require('path');
 var glob = require('glob');
 var slash = require('slash');
 var utils = require('./helpers/utils');
-var ConcatSource = require('webpack/lib/ConcatSource');
 var ModuleFilenameHelpers = require('webpack/lib/ModuleFilenameHelpers');
+
+var ConcatSource;
+try {
+  ConcatSource = require('webpack/lib/ConcatSource');       // webpack 1.x
+} catch (e) {
+  ConcatSource = require('webpack-sources').ConcatSource;   // webpack 2.x
+}
 
 /**
  * Constructor
